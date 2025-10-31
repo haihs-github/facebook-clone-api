@@ -62,8 +62,8 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
 	try {
-		const { email, password } = req.body;
-		const user = await User.findOne({ email: email });
+		const { username, password } = req.body;
+		const user = await User.findOne({ username: username });
 
 		if (!user) {
 			return res.status(404).json({ message: "tai khoan khong ton tai" })
@@ -94,7 +94,8 @@ exports.login = async (req, res) => {
 	} catch (err) {
 		console.log("loi:", err)
 		res.status(500).json({
-			message: "co loi xay ra"
+			message: "co loi xay ra",
+			error: err.message
 		})
 	}
 }
